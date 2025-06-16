@@ -19,6 +19,11 @@ import { ShipmentModule } from './shipment/shipment.module';
         database: configService.get('DB_DATABASE'),
         entities: [__dirname + '/**/*.entity{.ts,.js}'],
         synchronize: configService.get('NODE_ENV') === 'development',
+        uuidExtension: 'pgcrypto',
+        extra: {
+          max: 20,
+          connectionTimeoutMillis: 5000,
+        },
       }),
       inject: [ConfigService],
     }),
