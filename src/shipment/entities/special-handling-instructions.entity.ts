@@ -5,12 +5,20 @@ export class SpecialHandlingInstructions {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column()
-  electronics: string;
+  @Column('jsonb', { nullable: true })
+  instructions: {
+    Electronics?: string;
+    Appliances?: string;
+    Furniture?: string;
+    [key: string]: string | undefined;
+  };
 
-  @Column()
-  appliances: string;
+  @Column('jsonb', { nullable: true })
+  instructionList: string[];
 
-  @Column()
-  furniture: string;
+  @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
+  createdAt: Date;
+
+  @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP', onUpdate: 'CURRENT_TIMESTAMP' })
+  updatedAt: Date;
 } 
